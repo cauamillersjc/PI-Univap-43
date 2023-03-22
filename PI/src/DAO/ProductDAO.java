@@ -6,14 +6,14 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import DTO.Products;
+import Model.Product;
 
 
 /**
  *
  * @author Bispo
  */
-public class ProductsDAO {
+public class ProductDAO {
     
         
     

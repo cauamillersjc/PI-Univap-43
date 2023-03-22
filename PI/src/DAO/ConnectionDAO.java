@@ -13,11 +13,11 @@ public class ConnectionDAO {
         Connection conn = null;
         
         try{
-            String url = "jdbc:mysql://localhost/market?user=root&password=";
+            String url = "jdbc:mysql://localhost/market_pdv?user=root&password=";
             conn = DriverManager.getConnection(url);
             
         } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "ConexaoDAO" + erro);
+            JOptionPane.showMessageDialog(null, "ConnectionDAO" + erro);
         }
         
         return conn;
