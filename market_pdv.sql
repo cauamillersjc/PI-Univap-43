@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
   `stock_quantity` bigint(20) NOT NULL,
   `ean` varchar(255) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `sales` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `total_price` double NOT NULL,
   `total_quantity` int(11) NOT NULL,
   `sale_datetime` datetime NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `sales` (
 --
 
 CREATE TABLE `sale_products` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) DEFAULT NULL,
   `sale_id` int(11) DEFAULT NULL,
   `product_quantity` int(11) NOT NULL

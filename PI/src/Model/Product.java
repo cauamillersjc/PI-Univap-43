@@ -1,8 +1,10 @@
+package Model;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+
 
 public class Product {
     private int id;
@@ -30,11 +32,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getStock_quantity() {
+    public int getQuantity() {
         return stock_quantity;
     }
 
-    public void setStock_quantity(int stock_quantity) {
+    public void setQuantity(int stock_quantity) {
         this.stock_quantity = stock_quantity;
     }
 
@@ -69,6 +71,5 @@ public class Product {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
     
 }
