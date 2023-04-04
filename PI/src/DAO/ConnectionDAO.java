@@ -7,24 +7,23 @@ import javax.swing.JOptionPane;
 
 
 public class ConnectionDAO {
-    
+
     public Connection connectBD(){
-        
+
         Connection conn = null;
-        
+
         try{
-            String url = "jdbc:mysql://localhost/market_pdv?user=root&password=";
-            conn = DriverManager.getConnection(url);
-            
+            return DriverManager.getConnection("jdbc:mysql://localhost/market_pdv", "root", "");
+
         } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "ConnectionDAO" + erro);
+            JOptionPane.showMessageDialog(null, "ConexaoDAO" + erro);
         }
-        
+
         return conn;
     }
-    
+
     public static void main(String[] args) {
-        
+
     }
-    
+
 }
