@@ -87,7 +87,7 @@ public class EditProduct extends javax.swing.JFrame {
         txtEan.setBounds(30, 480, 980, 70);
 
         btnConfirmEdit.setContentAreaFilled(false);
-        btnConfirmEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConfirmEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmEditActionPerformed(evt);
@@ -99,7 +99,7 @@ public class EditProduct extends javax.swing.JFrame {
         txtId.setBounds(40, 150, 90, 40);
 
         btnCancelEdit.setContentAreaFilled(false);
-        btnCancelEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCancelEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelEditActionPerformed(evt);
@@ -149,7 +149,7 @@ public class EditProduct extends javax.swing.JFrame {
         getContentPane().add(jLabel19);
         jLabel19.setBounds(30, 450, 60, 30);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Product Register - Frame.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EditProduct.png"))); // NOI18N
         jLabel2.setPreferredSize(new java.awt.Dimension(1080, 720));
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1080, 740);
