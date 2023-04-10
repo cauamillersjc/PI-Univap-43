@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Model.Product;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,6 +18,8 @@ import Model.Product;
 public class ProductDAO {
     private Connection conn;
     private PreparedStatement pstm;
+    private ResultSet rs;
+    ArrayList<Product> list = new ArrayList<>();
 
     public ProductDAO(){
         this.conn = new ConnectionDAO().connectBD();
@@ -45,7 +49,7 @@ public class ProductDAO {
         }
     }
     
-    public void editarProduto(Product objproduct){
+    public void editProduct(Product objproduct){
         
         String sql = "UPDATE products SET description = ?, ean = ?, price = ?, sku = ?, stock_quantity = ?, status = ? WHERE id = ?";
         
@@ -69,5 +73,31 @@ public class ProductDAO {
             JOptionPane.showMessageDialog(null, "editarProdutoDAO" + error);
         } 
     }
+    
+    public ArrayList<Product> searchProduct(){
+        String sql = "SELECT * FROM  products";
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                Product objproduct = new Product();
+                objproduct.setDescription(rs.getString("description"));
+                objproduct.setEan(rs.getString("ean"));
+                objproduct.setId(rs.getInt("id"));
+                objproduct.setPrice(rs.getFloat("price"));
+                objproduct.setQuantity(rs.getInt("stock_quantity"));
+                objproduct.setSku(rs.getString("sku"));
+                objproduct.setStatus(rs.getBoolean("status"));
+                
+                list.add(objproduct);
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "searchProduct productDAO: " + erro);
+        }
+        return list;
+    }
+    
     
 }
