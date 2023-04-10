@@ -133,7 +133,7 @@ public class EditProduct extends javax.swing.JFrame {
         chkStatus.setBackground(new java.awt.Color(161, 131, 239));
         chkStatus.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         chkStatus.setForeground(new java.awt.Color(255, 255, 255));
-        chkStatus.setText("STATUS");
+        chkStatus.setText("ATIVO");
         chkStatus.setContentAreaFilled(false);
         getContentPane().add(chkStatus);
         chkStatus.setBounds(30, 440, 110, 45);
@@ -298,8 +298,6 @@ public class EditProduct extends javax.swing.JFrame {
         quantity = Integer.parseInt(txtQuantity.getText());
         id = Integer.parseInt(txtId.getText());
         
-        
-
         Product objproduct = new Product();
         objproduct.setDescription(description);
         objproduct.setEan(ean);
