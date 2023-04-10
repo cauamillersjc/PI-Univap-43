@@ -415,7 +415,7 @@ public class EditProduct extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setNumRows(0);
 
-            ArrayList<Product> list = objproductdao.SearchProduct();
+            ArrayList<Product> list = objproductdao.searchProduct();
 
             for(int num = 0; num < list.size(); num++){
                 model.addRow(new Object[]{
