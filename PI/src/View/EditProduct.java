@@ -2,12 +2,16 @@ package View;
 
 import DAO.ProductDAO;
 import Model.Product;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Bispo
@@ -19,6 +23,7 @@ public class EditProduct extends javax.swing.JFrame {
      */
     public EditProduct() {
         initComponents();
+        listProduct();
     }
 
     /**
@@ -30,24 +35,50 @@ public class EditProduct extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jMenuItem1 = new javax.swing.JMenuItem();
         txtDescription = new javax.swing.JTextField();
-        txtSku = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
         txtQuantity = new javax.swing.JTextField();
         txtEan = new javax.swing.JTextField();
         btnConfirmEdit = new javax.swing.JButton();
-        txtId = new javax.swing.JTextField();
         btnCancelEdit = new javax.swing.JButton();
         chkStatus = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        txtSku = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblProduct = new javax.swing.JTable();
+        txtId = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1080, 720));
+        setMinimumSize(new java.awt.Dimension(1080, 770));
+        setPreferredSize(new java.awt.Dimension(1080, 770));
         getContentPane().setLayout(null);
 
         txtDescription.setBackground(new java.awt.Color(161, 131, 239));
@@ -56,35 +87,28 @@ public class EditProduct extends javax.swing.JFrame {
         txtDescription.setBorder(null);
         txtDescription.setPreferredSize(new java.awt.Dimension(81, 25));
         getContentPane().add(txtDescription);
-        txtDescription.setBounds(30, 260, 980, 70);
-
-        txtSku.setBackground(new java.awt.Color(161, 131, 239));
-        txtSku.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtSku.setForeground(new java.awt.Color(255, 255, 255));
-        txtSku.setBorder(null);
-        getContentPane().add(txtSku);
-        txtSku.setBounds(30, 370, 460, 70);
+        txtDescription.setBounds(30, 515, 830, 40);
 
         txtPrice.setBackground(new java.awt.Color(161, 131, 239));
         txtPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPrice.setForeground(new java.awt.Color(255, 255, 255));
         txtPrice.setBorder(null);
         getContentPane().add(txtPrice);
-        txtPrice.setBounds(510, 370, 270, 70);
+        txtPrice.setBounds(690, 595, 160, 40);
 
         txtQuantity.setBackground(new java.awt.Color(161, 131, 239));
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtQuantity.setForeground(new java.awt.Color(255, 255, 255));
         txtQuantity.setBorder(null);
         getContentPane().add(txtQuantity);
-        txtQuantity.setBounds(800, 370, 211, 70);
+        txtQuantity.setBounds(861, 595, 150, 40);
 
         txtEan.setBackground(new java.awt.Color(161, 131, 239));
         txtEan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtEan.setForeground(new java.awt.Color(255, 255, 255));
         txtEan.setBorder(null);
         getContentPane().add(txtEan);
-        txtEan.setBounds(30, 480, 980, 70);
+        txtEan.setBounds(370, 595, 310, 40);
 
         btnConfirmEdit.setContentAreaFilled(false);
         btnConfirmEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -94,9 +118,7 @@ public class EditProduct extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnConfirmEdit);
-        btnConfirmEdit.setBounds(300, 640, 220, 50);
-        getContentPane().add(txtId);
-        txtId.setBounds(40, 150, 90, 40);
+        btnConfirmEdit.setBounds(290, 660, 220, 50);
 
         btnCancelEdit.setContentAreaFilled(false);
         btnCancelEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -106,69 +128,169 @@ public class EditProduct extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancelEdit);
-        btnCancelEdit.setBounds(570, 640, 210, 50);
+        btnCancelEdit.setBounds(560, 660, 210, 50);
 
+        chkStatus.setBackground(new java.awt.Color(161, 131, 239));
         chkStatus.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         chkStatus.setForeground(new java.awt.Color(255, 255, 255));
         chkStatus.setText("STATUS");
+        chkStatus.setContentAreaFilled(false);
         getContentPane().add(chkStatus);
-        chkStatus.setBounds(900, 150, 110, 45);
+        chkStatus.setBounds(30, 440, 110, 45);
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("DESCRIÇÃO:");
+        jLabel18.setText("Cód. Prod.");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(30, 230, 140, 30);
+        jLabel18.setBounds(870, 485, 150, 30);
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("SKU:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(30, 340, 60, 30);
+        jLabel16.setBounds(30, 565, 60, 30);
+
+        txtSku.setBackground(new java.awt.Color(161, 131, 239));
+        txtSku.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtSku.setForeground(new java.awt.Color(255, 255, 255));
+        txtSku.setBorder(null);
+        txtSku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSkuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtSku);
+        txtSku.setBounds(30, 595, 330, 40);
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("PREÇO:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(510, 340, 80, 30);
+        jLabel17.setBounds(690, 565, 80, 30);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("QUANTIDADE:");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(800, 340, 160, 30);
+        jLabel11.setBounds(860, 565, 160, 30);
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
         jLabel19.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("EAN:");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(30, 450, 60, 30);
+        jLabel19.setBounds(370, 565, 60, 30);
+
+        tblProduct.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "SKU", "Descrição", "Preço", "Quantidade", "Ean", "Status", "id"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditProduct.this.mouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblProduct);
+        if (tblProduct.getColumnModel().getColumnCount() > 0) {
+            tblProduct.getColumnModel().getColumn(0).setMinWidth(100);
+            tblProduct.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblProduct.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblProduct.getColumnModel().getColumn(2).setMinWidth(90);
+            tblProduct.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tblProduct.getColumnModel().getColumn(2).setMaxWidth(90);
+            tblProduct.getColumnModel().getColumn(3).setMinWidth(90);
+            tblProduct.getColumnModel().getColumn(3).setPreferredWidth(90);
+            tblProduct.getColumnModel().getColumn(3).setMaxWidth(90);
+            tblProduct.getColumnModel().getColumn(4).setMinWidth(0);
+            tblProduct.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tblProduct.getColumnModel().getColumn(4).setMaxWidth(0);
+            tblProduct.getColumnModel().getColumn(5).setMinWidth(80);
+            tblProduct.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tblProduct.getColumnModel().getColumn(5).setMaxWidth(80);
+            tblProduct.getColumnModel().getColumn(6).setMinWidth(0);
+            tblProduct.getColumnModel().getColumn(6).setPreferredWidth(0);
+            tblProduct.getColumnModel().getColumn(6).setMaxWidth(0);
+        }
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(30, 180, 980, 260);
+
+        txtId.setBackground(new java.awt.Color(161, 131, 249));
+        txtId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtId.setForeground(new java.awt.Color(255, 255, 255));
+        txtId.setBorder(null);
+        txtId.setEnabled(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtId);
+        txtId.setBounds(870, 515, 140, 40);
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("DESCRIÇÃO:");
+        getContentPane().add(jLabel20);
+        jLabel20.setBounds(30, 485, 150, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EditProduct.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(1080, 720));
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1080, 740);
+        jLabel2.setBounds(-10, 0, 1080, 770);
+
+        jMenu1.setText("Produtos");
+
+        jMenuItem2.setText("Cadastro");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Editar Produto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmEditActionPerformed
+
         String description, ean, sku;
         double price;
         int quantity, id;
         boolean status;
-        
-        if (chkStatus.isSelected()) {
-            status = true;
-        } else {
-            status = false;
-        }
-        
+
+        status = chkStatus.isSelected();
         description = txtDescription.getText();
         ean = txtEan.getText();
         sku = txtSku.getText();
@@ -176,22 +298,53 @@ public class EditProduct extends javax.swing.JFrame {
         quantity = Integer.parseInt(txtQuantity.getText());
         id = Integer.parseInt(txtId.getText());
         
+        
+
         Product objproduct = new Product();
-        objproduct.setId(id);
         objproduct.setDescription(description);
         objproduct.setEan(ean);
         objproduct.setSku(sku);
         objproduct.setPrice(price);
         objproduct.setQuantity(quantity);
         objproduct.setStatus(status);
-        
+        objproduct.setId(id);
+
         ProductDAO objproductdao = new ProductDAO();
-        objproductdao.editarProduto(objproduct);
+        objproductdao.editProduct(objproduct);
+        listProduct();
+        clearField();
+        
     }//GEN-LAST:event_btnConfirmEditActionPerformed
 
     private void btnCancelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelEditActionPerformed
-            this.setVisible(false);
+        listProduct();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelEditActionPerformed
+
+    private void txtSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSkuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSkuActionPerformed
+
+    private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
+        if (evt.getClickCount() == 2) {
+            loadingProduct();
+        }
+    }//GEN-LAST:event_mouseClicked
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.setVisible(false);
+        ProductRegister pr = new ProductRegister();
+        pr.setVisible(true);
+                
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,6 +391,16 @@ public class EditProduct extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtEan;
     private javax.swing.JTextField txtId;
@@ -245,4 +408,57 @@ public class EditProduct extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtSku;
     // End of variables declaration//GEN-END:variables
+
+    private void listProduct() {
+        try {
+            ProductDAO objproductdao = new ProductDAO();
+            DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+            model.setNumRows(0);
+
+            ArrayList<Product> list = objproductdao.SearchProduct();
+
+            for(int num = 0; num < list.size(); num++){
+                model.addRow(new Object[]{
+                    list.get(num).getSku(),
+                    list.get(num).getDescription(),
+                    list.get(num).getPrice(),
+                    list.get(num).getQuantity(),                    
+                    list.get(num).getEan(),
+                    list.get(num).isStatus(),
+                    list.get(num).getId()
+                         
+                });
+
+            }
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "EditProduct view listProduct(): " + erro);
+        }
+    }
+
+    private void loadingProduct() {
+        int set = tblProduct.getSelectedRow();
+        boolean status = (boolean) tblProduct.getModel().getValueAt(set, 5);
+        chkStatus.setSelected(status);
+        
+        
+        txtDescription.setText(tblProduct.getModel().getValueAt(set, 1).toString());
+        txtSku.setText(tblProduct.getModel().getValueAt(set, 0).toString());
+        txtEan.setText(tblProduct.getModel().getValueAt(set, 4).toString());
+        txtPrice.setText(tblProduct.getModel().getValueAt(set, 2).toString());
+        txtQuantity.setText(tblProduct.getModel().getValueAt(set, 3).toString());
+        txtId.setText(tblProduct.getModel().getValueAt(set, 6).toString());
+       
+    }
+    
+    private void clearField(){
+        txtDescription.setText("");
+        txtPrice.setText("");
+        txtSku.setText("");
+        txtEan.setText("");
+        txtQuantity.setText("");
+        chkStatus.setSelected(false);
+        
+    }
+
 }
