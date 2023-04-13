@@ -2,10 +2,13 @@ package View;
 
 import DAO.ProductDAO;
 import Model.Product;
+import java.awt.Component;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -38,6 +41,7 @@ public class EditProduct extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         txtDescription = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
         txtQuantity = new javax.swing.JTextField();
@@ -57,6 +61,8 @@ public class EditProduct extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -76,9 +82,11 @@ public class EditProduct extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
+        jMenuItem4.setText("jMenuItem4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 770));
-        setPreferredSize(new java.awt.Dimension(1080, 770));
+        setPreferredSize(new java.awt.Dimension(1080, 790));
         getContentPane().setLayout(null);
 
         txtDescription.setBackground(new java.awt.Color(161, 131, 239));
@@ -111,24 +119,24 @@ public class EditProduct extends javax.swing.JFrame {
         txtEan.setBounds(370, 595, 310, 40);
 
         btnConfirmEdit.setContentAreaFilled(false);
-        btnConfirmEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConfirmEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmEditActionPerformed(evt);
             }
         });
         getContentPane().add(btnConfirmEdit);
-        btnConfirmEdit.setBounds(290, 660, 220, 50);
+        btnConfirmEdit.setBounds(290, 653, 220, 56);
 
         btnCancelEdit.setContentAreaFilled(false);
-        btnCancelEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelEditActionPerformed(evt);
             }
         });
         getContentPane().add(btnCancelEdit);
-        btnCancelEdit.setBounds(560, 660, 210, 50);
+        btnCancelEdit.setBounds(560, 653, 210, 56);
 
         chkStatus.setBackground(new java.awt.Color(161, 131, 239));
         chkStatus.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -255,8 +263,28 @@ public class EditProduct extends javax.swing.JFrame {
         jLabel20.setBounds(30, 485, 150, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EditProduct.png"))); // NOI18N
+        jLabel2.setMaximumSize(null);
+        jLabel2.setMinimumSize(null);
+        jLabel2.setPreferredSize(null);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(-10, 0, 1080, 770);
+
+        jMenu2.setText("Vendas");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem5.setText("Venda");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Produtos");
 
@@ -287,17 +315,20 @@ public class EditProduct extends javax.swing.JFrame {
 
         String description, ean, sku;
         double price;
-        int quantity, id;
-        boolean status;
+        int quantity, id, status;
 
-        status = chkStatus.isSelected();
+        if (chkStatus.isSelected()) {
+            status = 1;
+        } else {
+            status = 0;
+        }
         description = txtDescription.getText();
         ean = txtEan.getText();
         sku = txtSku.getText();
-        price = Double.parseDouble(txtPrice.getText());
+        price = Double.parseDouble(txtPrice.getText().replace(",", "."));
         quantity = Integer.parseInt(txtQuantity.getText());
         id = Integer.parseInt(txtId.getText());
-        
+
         Product objproduct = new Product();
         objproduct.setDescription(description);
         objproduct.setEan(ean);
@@ -311,7 +342,7 @@ public class EditProduct extends javax.swing.JFrame {
         objproductdao.editProduct(objproduct);
         listProduct();
         clearField();
-        
+
     }//GEN-LAST:event_btnConfirmEditActionPerformed
 
     private void btnCancelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelEditActionPerformed
@@ -337,12 +368,22 @@ public class EditProduct extends javax.swing.JFrame {
         this.setVisible(false);
         ProductRegister pr = new ProductRegister();
         pr.setVisible(true);
-                
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        this.setVisible(false);
+        Sale sale = new Sale();
+        sale.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,10 +432,13 @@ public class EditProduct extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -414,17 +458,26 @@ public class EditProduct extends javax.swing.JFrame {
             model.setNumRows(0);
 
             ArrayList<Product> list = objproductdao.searchProduct();
-
-            for(int num = 0; num < list.size(); num++){
+            DecimalFormat df = new DecimalFormat("#,##0.00");
+            for (int num = 0; num < list.size(); num++) {
+                String status;
+                if (list.get(num).getStatus() == 1) {
+                    status = "ATIVO";
+                } else {
+                    status = "INATIVO";
+                }
+                double price = list.get(num).getPrice();
+                double roundedPrice = Math.round(price * 100.0) / 100.0;
+                String formattedPrice = df.format(roundedPrice);
                 model.addRow(new Object[]{
                     list.get(num).getSku(),
                     list.get(num).getDescription(),
-                    list.get(num).getPrice(),
-                    list.get(num).getQuantity(),                    
+                    formattedPrice,
+                    list.get(num).getQuantity(),
                     list.get(num).getEan(),
-                    list.get(num).isStatus(),
+                    status,
                     list.get(num).getId()
-                         
+
                 });
 
             }
@@ -435,28 +488,29 @@ public class EditProduct extends javax.swing.JFrame {
     }
 
     private void loadingProduct() {
+        boolean statusboolean;
         int set = tblProduct.getSelectedRow();
-        boolean status = (boolean) tblProduct.getModel().getValueAt(set, 5);
-        chkStatus.setSelected(status);
-        
-        
+        String status = (String) tblProduct.getModel().getValueAt(set, 5);
+        statusboolean = "ATIVO".equals(status);
+        chkStatus.setSelected(statusboolean);
+
         txtDescription.setText(tblProduct.getModel().getValueAt(set, 1).toString());
         txtSku.setText(tblProduct.getModel().getValueAt(set, 0).toString());
         txtEan.setText(tblProduct.getModel().getValueAt(set, 4).toString());
         txtPrice.setText(tblProduct.getModel().getValueAt(set, 2).toString());
         txtQuantity.setText(tblProduct.getModel().getValueAt(set, 3).toString());
         txtId.setText(tblProduct.getModel().getValueAt(set, 6).toString());
-       
-    }
-    
-    private void clearField(){
-        txtDescription.setText("");
-        txtPrice.setText("");
-        txtSku.setText("");
-        txtEan.setText("");
-        txtQuantity.setText("");
-        chkStatus.setSelected(false);
-        
+
     }
 
+    private void clearField() {
+        chkStatus.setSelected(false);
+        Component[] components = getContentPane().getComponents();
+        for (Component component : components) {
+            if (component instanceof JTextField) {
+                JTextField field = (JTextField) component;
+                field.setText("");
+            }
+        }
+    }
 }
