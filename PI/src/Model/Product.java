@@ -13,7 +13,7 @@ public class Product {
     private String ean;
     private String sku;
     private double price;
-    private boolean status;
+    private int status;
 
     
     public int getId() {
@@ -64,11 +64,11 @@ public class Product {
         this.price = price;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

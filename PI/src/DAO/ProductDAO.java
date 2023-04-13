@@ -35,7 +35,7 @@ public class ProductDAO {
             pstm.setString(2, objproduct.getEan());
             pstm.setDouble(3, objproduct.getPrice());
             pstm.setString(4, objproduct.getSku());
-            pstm.setBoolean(5, objproduct.isStatus());
+            pstm.setInt(5, objproduct.getStatus());
             pstm.setInt(6, objproduct.getQuantity());
             
             pstm.execute();
@@ -60,7 +60,7 @@ public class ProductDAO {
             pstm.setDouble(3, objproduct.getPrice());
             pstm.setString(4, objproduct.getSku());
             pstm.setInt(5, objproduct.getQuantity());
-            pstm.setBoolean(6, objproduct.isStatus());
+            pstm.setInt(6, objproduct.getStatus());
             pstm.setInt(7, objproduct.getId());
         
             pstm.execute();
@@ -89,7 +89,7 @@ public class ProductDAO {
                 objproduct.setPrice(rs.getFloat("price"));
                 objproduct.setQuantity(rs.getInt("stock_quantity"));
                 objproduct.setSku(rs.getString("sku"));
-                objproduct.setStatus(rs.getBoolean("status"));
+                objproduct.setStatus(rs.getInt("status"));
                 
                 list.add(objproduct);
             }
