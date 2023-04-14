@@ -32,6 +32,7 @@ public class ProductRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         txtEan = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
@@ -45,10 +46,18 @@ public class ProductRegister extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 770));
-        setUndecorated(true);
         getContentPane().setLayout(null);
 
         txtEan.setBackground(new java.awt.Color(161, 131, 239));
@@ -67,14 +76,14 @@ public class ProductRegister extends javax.swing.JFrame {
         txtDescricao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
         txtDescricao.setBorder(null);
-        txtDescricao.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtDescricao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescricaoActionPerformed(evt);
             }
         });
         getContentPane().add(txtDescricao);
-        txtDescricao.setBounds(30, 270, 980, 60);
+        txtDescricao.setBounds(30, 260, 980, 70);
 
         txtQuantidade.setBackground(new java.awt.Color(161, 131, 239));
         txtQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -84,7 +93,7 @@ public class ProductRegister extends javax.swing.JFrame {
         txtQuantidade.setBounds(800, 370, 211, 70);
 
         btnConfirmRegister.setContentAreaFilled(false);
-        btnConfirmRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConfirmRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmRegisterActionPerformed(evt);
@@ -118,7 +127,7 @@ public class ProductRegister extends javax.swing.JFrame {
         txtPrice.setBounds(510, 370, 270, 70);
 
         btnCancelRegister.setContentAreaFilled(false);
-        btnCancelRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCancelRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelRegisterActionPerformed(evt);
@@ -139,7 +148,7 @@ public class ProductRegister extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("DESCRIÇÃO:");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(30, 240, 140, 30);
+        jLabel18.setBounds(30, 230, 140, 30);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -163,8 +172,39 @@ public class ProductRegister extends javax.swing.JFrame {
         jLabel16.setBounds(30, 340, 60, 30);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Product-Register.png"))); // NOI18N
+        jLabel15.setMaximumSize(null);
+        jLabel15.setPreferredSize(new java.awt.Dimension(1080, 790));
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(-10, 0, 1170, 750);
+        jLabel15.setBounds(-10, -20, 1180, 790);
+
+        jMenu1.setText("Vendas");
+
+        jMenuItem3.setText("Venda");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Produtos");
+
+        jMenuItem1.setText("Cadastro");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Editar Produto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,14 +225,14 @@ public class ProductRegister extends javax.swing.JFrame {
         String descricao, ean, sku;
         int quantity;
         double price;
-        boolean stats;
+        int status;
         
         descricao = txtDescricao.getText();
         ean = txtEan.getText();
         sku = txtSku.getText();
         quantity = Integer.parseInt(txtQuantidade.getText());
         price = Double.parseDouble(txtPrice.getText());
-        stats = true;
+        status = 1;
         
         Product objproduct = new Product();
         objproduct.setDescription(descricao);
@@ -200,7 +240,7 @@ public class ProductRegister extends javax.swing.JFrame {
         objproduct.setSku(sku);
         objproduct.setPrice(price);
         objproduct.setEan(ean); 
-        objproduct.setStatus(stats);
+        objproduct.setStatus(status);
         
         ProductDAO objproductdao = new ProductDAO();
         objproductdao.cadastrarProduto(objproduct);
@@ -213,6 +253,19 @@ public class ProductRegister extends javax.swing.JFrame {
     private void txtEanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEanActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.setVisible(false);
+        EditProduct ep = new EditProduct();
+        ep.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.setVisible(false);
+        Sale sale = new Sale();
+        sale.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,12 +305,19 @@ public class ProductRegister extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelRegister;
     private javax.swing.JButton btnConfirmRegister;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtEan;
     private javax.swing.JTextField txtPrice;
