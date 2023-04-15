@@ -1,6 +1,5 @@
 package DAO;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,6 +19,7 @@ public class ProductDAO {
     private PreparedStatement pstm;
     private ResultSet rs;
     ArrayList<Product> list = new ArrayList<>();
+    Product product;
 
     public ProductDAO(){
         this.conn = new ConnectionDAO().connectBD();
@@ -75,7 +75,7 @@ public class ProductDAO {
     }
     
     public ArrayList<Product> searchProduct(){
-        String sql = "SELECT * FROM  products";
+        String sql = "SELECT * FROM products";
         
         try {
             pstm = conn.prepareStatement(sql);
@@ -97,6 +97,31 @@ public class ProductDAO {
             JOptionPane.showMessageDialog(null, "searchProduct productDAO: " + erro);
         }
         return list;
+    }
+    
+    public Product searchProductByEan(String ean){
+        String sql = "SELECT * FROM products WHERE ean = '" + ean + "' LIMIT 1";
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                Product objproduct = new Product();
+                objproduct.setDescription(rs.getString("description"));
+                objproduct.setEan(rs.getString("ean"));
+                objproduct.setId(rs.getInt("id"));
+                objproduct.setPrice(rs.getFloat("price"));
+                objproduct.setQuantity(rs.getInt("stock_quantity"));
+                objproduct.setSku(rs.getString("sku"));
+                objproduct.setStatus(rs.getBoolean("status"));
+                
+                product = objproduct;
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "searchProduct productDAO: " + erro);
+        }
+        return product;
     }
     
     
