@@ -1,12 +1,18 @@
+package View;
+
+
+import DAO.ProductDAO;
+import Model.Product;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
 
 /**
  *
- * @author Bispo
+ * @author Gabriel
  */
 public class ProductRegister extends javax.swing.JFrame {
 
@@ -26,21 +32,245 @@ public class ProductRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        txtEan = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
+        btnConfirmRegister = new javax.swing.JButton();
+        txtSku = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        btnCancelRegister = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 770));
+        getContentPane().setLayout(null);
+
+        txtEan.setBackground(new java.awt.Color(161, 131, 239));
+        txtEan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtEan.setForeground(new java.awt.Color(255, 255, 255));
+        txtEan.setBorder(null);
+        txtEan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEan);
+        txtEan.setBounds(30, 480, 980, 70);
+
+        txtDescricao.setBackground(new java.awt.Color(161, 131, 239));
+        txtDescricao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
+        txtDescricao.setBorder(null);
+        txtDescricao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDescricao);
+        txtDescricao.setBounds(30, 260, 980, 70);
+
+        txtQuantidade.setBackground(new java.awt.Color(161, 131, 239));
+        txtQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtQuantidade.setForeground(new java.awt.Color(255, 255, 255));
+        txtQuantidade.setBorder(null);
+        getContentPane().add(txtQuantidade);
+        txtQuantidade.setBounds(800, 370, 211, 70);
+
+        btnConfirmRegister.setContentAreaFilled(false);
+        btnConfirmRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConfirmRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnConfirmRegister);
+        btnConfirmRegister.setBounds(300, 640, 220, 60);
+
+        txtSku.setBackground(new java.awt.Color(161, 131, 239));
+        txtSku.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtSku.setForeground(new java.awt.Color(255, 255, 255));
+        txtSku.setBorder(null);
+        txtSku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSkuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtSku);
+        txtSku.setBounds(30, 370, 460, 70);
+
+        txtPrice.setBackground(new java.awt.Color(161, 131, 239));
+        txtPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtPrice.setBorder(null);
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtPrice);
+        txtPrice.setBounds(510, 370, 270, 70);
+
+        btnCancelRegister.setContentAreaFilled(false);
+        btnCancelRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelRegister);
+        btnCancelRegister.setBounds(570, 640, 220, 60);
+
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("EAN:");
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(30, 450, 60, 30);
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("DESCRIÇÃO:");
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(30, 230, 140, 30);
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("QUANTIDADE:");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(800, 340, 160, 30);
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("PREÇO:");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(510, 340, 80, 30);
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("SKU:");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(30, 340, 60, 30);
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Product-Register.png"))); // NOI18N
+        jLabel15.setMaximumSize(null);
+        jLabel15.setPreferredSize(new java.awt.Dimension(1080, 790));
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(-10, -20, 1180, 790);
+
+        jMenu1.setText("Vendas");
+
+        jMenuItem3.setText("Venda");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Produtos");
+
+        jMenuItem1.setText("Cadastro");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Editar Produto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
+
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
+
+    private void txtSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSkuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSkuActionPerformed
+
+    private void btnConfirmRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmRegisterActionPerformed
+        String descricao, ean, sku;
+        int quantity;
+        double price;
+        int status;
+        
+        descricao = txtDescricao.getText();
+        ean = txtEan.getText();
+        sku = txtSku.getText();
+        quantity = Integer.parseInt(txtQuantidade.getText());
+        price = Double.parseDouble(txtPrice.getText());
+        status = 1;
+        
+        Product objproduct = new Product();
+        objproduct.setDescription(descricao);
+        objproduct.setQuantity(quantity);
+        objproduct.setSku(sku);
+        objproduct.setPrice(price);
+        objproduct.setEan(ean); 
+        objproduct.setStatus(status);
+        
+        ProductDAO objproductdao = new ProductDAO();
+        objproductdao.cadastrarProduto(objproduct);
+    }//GEN-LAST:event_btnConfirmRegisterActionPerformed
+
+    private void btnCancelRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRegisterActionPerformed
+            txtDescricao.setText("");
+            txtEan.setText("");
+            txtSku.setText("");
+            txtQuantidade.setText("");
+            txtPrice.setText("");
+  
+    }//GEN-LAST:event_btnCancelRegisterActionPerformed
+
+    private void txtEanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEanActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.setVisible(false);
+        EditProduct ep = new EditProduct();
+        ep.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.setVisible(false);
+        SaleScreen sale = new SaleScreen();
+        sale.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -53,7 +283,7 @@ public class ProductRegister extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -78,5 +308,25 @@ public class ProductRegister extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelRegister;
+    private javax.swing.JButton btnConfirmRegister;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtEan;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtSku;
     // End of variables declaration//GEN-END:variables
 }
