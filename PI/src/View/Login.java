@@ -102,7 +102,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         User user = new User();
-        Sale sale = new Sale ();
+        SaleScreen sale = new SaleScreen ();
         if (!txtLogin.getText().equals(user.getLogin()) && !txtPassword.getText().equals(user.getPassword())){
             JOptionPane.showMessageDialog(null, "Login e Senha Inválidos!");
         }
