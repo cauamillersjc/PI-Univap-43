@@ -114,12 +114,13 @@ public class ProductDAO {
                 objproduct.setPrice(rs.getFloat("price"));
                 objproduct.setQuantity(rs.getInt("stock_quantity"));
                 objproduct.setSku(rs.getString("sku"));
-                objproduct.setStatus(rs.getBoolean("status"));
+                objproduct.setStatus(rs.getInt("status"));
                 
                 product = objproduct;
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "searchProduct productDAO: " + erro);
+            
         }
         return product;
     }
