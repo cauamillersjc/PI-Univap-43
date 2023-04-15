@@ -247,7 +247,12 @@ public class ProductRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmRegisterActionPerformed
 
     private void btnCancelRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRegisterActionPerformed
-    System.exit(0);        // TODO add your handling code here:
+            txtDescricao.setText("");
+            txtEan.setText("");
+            txtSku.setText("");
+            txtQuantidade.setText("");
+            txtPrice.setText("");
+  
     }//GEN-LAST:event_btnCancelRegisterActionPerformed
 
     private void txtEanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEanActionPerformed
@@ -263,7 +268,7 @@ public class ProductRegister extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.setVisible(false);
-        Sale sale = new Sale();
+        SaleScreen sale = new SaleScreen();
         sale.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

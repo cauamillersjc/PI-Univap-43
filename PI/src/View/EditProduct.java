@@ -2,6 +2,7 @@ package View;
 
 import DAO.ProductDAO;
 import Model.Product;
+import Model.Sale;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -344,7 +345,7 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void btnCancelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelEditActionPerformed
         listProduct();
-        this.setVisible(false);
+        clearField();
     }//GEN-LAST:event_btnCancelEditActionPerformed
 
     private void txtSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSkuActionPerformed
@@ -378,7 +379,7 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         this.setVisible(false);
-        Sale sale = new Sale();
+        SaleScreen sale = new SaleScreen();
         sale.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
