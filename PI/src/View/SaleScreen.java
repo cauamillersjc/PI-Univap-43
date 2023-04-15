@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,55 +24,78 @@ import javax.swing.table.DefaultTableModel;
 public class SaleScreen extends javax.swing.JFrame {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
-    
+
     ProductDAO productDAO = new ProductDAO();
     SaleDAO saleDAO = new SaleDAO();
     double totalPrice = 0.0;
-    
+    Sale sale = new Sale();
+    ArrayList<Product> products = new ArrayList();
+
     /**
      * Creates new form Sale
      */
     public SaleScreen() {
         initComponents();
         lblId.setText(String.valueOf(saleDAO.getLastSaleID()));
-        
+        listProduct();
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String formattedDateTime = now.format(formatter);
         lblData.setText(formattedDateTime);
     }
-    
-    private void addProduct(String productEan){
+
+    private void addProduct(String productEan) {
         Product product = productDAO.searchProductByEan(productEan);
-        
-        if(product != null){
-            lblError.setText("");
-            products.add(product);
-            totalPrice += product.getPrice();
-            lblTotal.setText("R$ " + df.format(totalPrice));
+        if (product != null) {
+            String quantityString = txtQuantity.getText();
+            if (!quantityString.isEmpty()) {
+                int quantity = Integer.parseInt(quantityString);
+                product.setQuantity(quantity);
+
+                lblError.setText("");
+                products.add(product);
+                double total = Double.parseDouble(txtQuantity.getText()) * product.getPrice();
+                totalPrice += total;
+                lblTotal.setText("R$ " + df.format(totalPrice));
+                txtQuantity.setText("");
+                jTextField1.setText("");
+                DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+
+                model.addRow(new Object[]{
+                    product.getEan(),
+                    product.getDescription(),
+                    product.getQuantity(),
+                    product.getPrice(),
+                    product.getSku(),
+                    product.getStatus(),
+                    product.getId(),
+                    total
+
+                });
+            } else {
+                lblError.setText("Insira a quantidade do produto.");
+            }
+        } else {
+            lblError.setText("Produto inexistente");
         }
-        else{
-            lblError.setText("Produto inexistente."); 
-        }
+
     }
-    
+
     private void listProduct() {
         try {
-            ProductDAO objProductDAO = new ProductDAO();
+
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setNumRows(0);
 
-            for(int num = 0; num < products.size(); num++){
+            for (int num = 0; num < products.size(); num++) {
                 model.addRow(new Object[]{
                     products.get(num).getSku(),
                     products.get(num).getDescription(),
                     products.get(num).getPrice(),
-                    products.get(num).getQuantity(),                    
+                    products.get(num).getQuantity(),
                     products.get(num).getEan(),
-                    products.get(num).isStatus(),
-                    products.get(num).getId()
-                         
-                });
+                    products.get(num).getStatus(),
+                    products.get(num).getId(),});
 
             }
 
@@ -79,9 +103,27 @@ public class SaleScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SaleScreen view listProduct(): " + erro);
         }
     }
-    
-    Sale sale;
-    ArrayList<Product> products = new ArrayList();
+
+    public void clearRows(ArrayList<Product> table) {
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        int numRows = model.getRowCount();
+        if (numRows > 0) {
+            while (numRows > 0) {
+                model.removeRow(numRows - 1);
+                numRows--;
+            }
+        }
+    }
+
+    public void clearFields() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String formattedDateTime = now.format(formatter);
+        lblData.setText(formattedDateTime);
+        lblTotal.setText("R$ " + 0.0);
+        jTextField1.setText("");
+        txtQuantity.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,10 +149,16 @@ public class SaleScreen extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         lblError = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -125,14 +173,14 @@ public class SaleScreen extends javax.swing.JFrame {
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "SKU", "Descrição", "Preço", "Quantidade", "Ean", "Status", "id"
+                "Ean", "Descrição", "Quantidade", "Preço un.", "SKU", "Status", "id", "Preço total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -140,6 +188,17 @@ public class SaleScreen extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tblProduct);
+        if (tblProduct.getColumnModel().getColumnCount() > 0) {
+            tblProduct.getColumnModel().getColumn(4).setMinWidth(0);
+            tblProduct.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tblProduct.getColumnModel().getColumn(4).setMaxWidth(0);
+            tblProduct.getColumnModel().getColumn(5).setMinWidth(0);
+            tblProduct.getColumnModel().getColumn(5).setPreferredWidth(0);
+            tblProduct.getColumnModel().getColumn(5).setMaxWidth(0);
+            tblProduct.getColumnModel().getColumn(6).setMinWidth(0);
+            tblProduct.getColumnModel().getColumn(6).setPreferredWidth(0);
+            tblProduct.getColumnModel().getColumn(6).setMaxWidth(0);
+        }
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(30, 180, 720, 490);
@@ -171,6 +230,11 @@ public class SaleScreen extends javax.swing.JFrame {
 
         btnConfirm.setContentAreaFilled(false);
         btnConfirm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnConfirm);
         btnConfirm.setBounds(820, 690, 210, 40);
 
@@ -190,13 +254,18 @@ public class SaleScreen extends javax.swing.JFrame {
         jPanel1.add(lblId);
         lblId.setBounds(930, 400, 100, 80);
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField1KeyPressed(evt);
             }
         });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(40, 122, 490, 40);
+        jTextField1.setBounds(40, 117, 360, 40);
 
         lblError.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 0, 0));
@@ -204,14 +273,59 @@ public class SaleScreen extends javax.swing.JFrame {
         jPanel1.add(lblError);
         lblError.setBounds(260, 40, 380, 50);
 
+        txtQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantityActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtQuantity);
+        txtQuantity.setBounds(420, 117, 100, 40);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("QTD.");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(420, 100, 50, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("EAN");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(40, 100, 28, 20);
+
+        btnAdd.setContentAreaFilled(false);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdd);
+        btnAdd.setBounds(552, 117, 190, 40);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sale.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1080, 770);
 
-        jMenu3.setText("File");
+        jMenu3.setText("Venda");
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Edit");
+        jMenu4.setText("Produto");
+
+        jMenuItem1.setText("Cadastro");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem2.setText("EditarProduto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
         jMenuBar2.add(jMenu4);
 
         setJMenuBar(jMenuBar2);
@@ -231,20 +345,84 @@ public class SaleScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
+    DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+    int selectedRow = tblProduct.getSelectedRow();
+
+    if (selectedRow != -1) { 
+        double total = (double) model.getValueAt(selectedRow, 7);
+        model.removeRow(selectedRow);
+        totalPrice -= total;
+        lblTotal.setText("R$ " + df.format(totalPrice));
+        
+
+    }  else {
+        JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
+    }
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
+        clearRows(products);
+        clearFields();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(jTextField1.getText().length() > 0)
+            if (jTextField1.getText().length() > 0) {
                 addProduct(jTextField1.getText());
+            }
         }
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        Object[] options = {"Débito", "Crédito"};
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        if (model.getRowCount() > 0) {
+            sale.setSale_datetime(lblData.getText());
+            int choice = JOptionPane.showOptionDialog(null, "Escolha o método de pagamento:", "Pagamento",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (choice == 0) {
+                // Método de débito
+                sale.setPayment_method("débito");
+            } else if (choice == 1) {
+                // Método de crédito
+                sale.setPayment_method("crédito");
+            }
+            saleDAO.finishSale(products, sale);
+        } else {
+            JOptionPane.showMessageDialog(null, "Insira algum produto para finalizar a venda");
+        }
+    }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.setVisible(false);
+        ProductRegister pr = new ProductRegister();
+        pr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.setVisible(false);
+        EditProduct ep = new EditProduct();
+        ep.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String productEan = jTextField1.getText();
+        if (!productEan.equals("")) {
+            addProduct(productEan);
+        } else {
+            lblError.setText("Por favor, insira o EAN");
+        }
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,17 +461,22 @@ public class SaleScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnNew;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -302,5 +485,6 @@ public class SaleScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblProduct;
+    private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 }
